@@ -1,0 +1,69 @@
+{
+  "name": "medium-editor-insert-plugin",
+  "version": "2.5.1",
+  "description": "jQuery insert plugin for MediumEditor",
+  "main": "dist/js/medium-editor-insert-plugin.js",
+  "homepage": "http://linkesch.com/medium-editor-insert-plugin",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orthes/medium-editor-insert-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/orthes/medium-editor-insert-plugin/issues"
+  },
+  "author": {
+    "name": "Pavel Linkesch",
+    "email": "pavel.linkesch@gmail.com",
+    "url": "http://linkesch.com"
+  },
+  "contributors": [
+    {
+      "name": "Jeremy Benoist",
+      "email": "jeremy.benoist@gmail.com"
+    }
+  ],
+  "keywords": [
+    "contenteditable",
+    "editor",
+    "medium",
+    "wysiwyg",
+    "rich-text",
+    "images",
+    "embeds",
+    "videos"
+  ],
+  "dependencies": {
+    "blueimp-file-upload": "^9.28.0",
+    "handlebars": "^4.0.12",
+    "jquery": ">=1.9.0",
+    "jquery-sortable": "~0.9.12",
+    "medium-editor": "^5.15.0"
+  },
+  "devDependencies": {
+    "all-contributors-cli": "^5.10.2",
+    "grunt": "^1.0.3",
+    "grunt-autoprefixer": "^3.0.1",
+    "grunt-banner": "^0.6.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-handlebars": "^1.0.0",
+    "grunt-contrib-jasmine": "^1.2.0",
+    "grunt-contrib-jshint": "^2.0.0",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-csso": "^2.2.4",
+    "grunt-jscs": "^3.0.1",
+    "grunt-sass": "^3.0.2",
+    "grunt-template-jasmine-istanbul": "^0.5.0",
+    "jit-grunt": "^0.10.0",
+    "node-sass": "^4.11.0",
+    "time-grunt": "^2.0.0"
+  },
+  "scripts": {
+    "test": "grunt test --verbose",
+    "contributors:add": "all-contributors add",
+    "contributors:init": "all-contributors init",
+    "contributors:check": "all-contributors check",
+    "contributors:generate": "all-contributors generate"
+  }
+}
