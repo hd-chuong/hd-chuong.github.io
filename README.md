@@ -1,4 +1,4 @@
 # hd-chuong.github.io
 My software engineering journey
 
-recheck
+checking again
