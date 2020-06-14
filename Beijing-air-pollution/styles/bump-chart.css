@@ -1,0 +1,11 @@
+.grid {
+    opacity: 0.1;
+}
+
+.xAxis .domain{
+    stroke-width: 0em;
+}
+
+.xAxis .tick line, .yAxis .tick line {
+    stroke-width: 0em;
+}

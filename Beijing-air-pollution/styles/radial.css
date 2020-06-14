@@ -1,0 +1,73 @@
+#full-radial {
+    display: flex;
+    font-family: 'Lora', 'Manrope';
+}
+
+#left-radial {
+    width: 90%;
+    display: block;
+    padding: 0;
+}
+
+.topYAxis {
+    font-size: 8px;
+}
+
+.bottomYAxis {
+    font-size: 8px;
+}
+
+#raidal-chart {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+#right-radial {
+    position: absolute;
+    left: 80%;
+    height: 100%;
+    display: block;
+}
+
+#tooltip {
+    width: 100%;
+    min-height: 45%;
+    font-size: 16px;
+    text-align: center;
+}
+
+#legend-section {
+    top: 55%;
+    width: 100%;
+    font-size: 15px;
+    border-width: 0.1rem;
+}
+
+/* #tooltip {
+    color: 
+} */
+
+#tooltip td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px 10px;
+}
+
+#tooltip .index, #tooltip h3 {
+    margin: auto;
+}
+
+.subtitle {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+.month {
+    font-size: 10px;
+    opacity: 0.6;
+}
+
+circle.baseline.temp {
+    opacity: 0.5;
+}

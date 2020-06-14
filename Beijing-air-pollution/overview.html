@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="scripts/d3-scale-radial.js"></script>
+  <script src="./scripts/utils.js"></script>
+  <script src="./scripts/data.js"></script>
+  <script src="./scripts/nav.js"></script>
+
+  <!-- <script src="./scripts/line-chart.js"></script> -->
+  <!-- <script src="./scripts/bar-chart.js"></script>
+  <script src="./scripts/pie-chart.js"></script>
+  <script src="./scripts/bump-chart.js"></script> -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+  <link href="styles/dashboard.css" type="text/css" rel="stylesheet"/>
+  <link href="styles/radial.css" type="text/css" rel="stylesheet"/>
+  <style>
+  /* text {
+      font-size: 14px;
+      font-family: monospace;
+    } */
+
+     /* .bottomYAxis {
+        writing-mode:vertical-lr;
+        /* transform: scale(1,-1,-1); */
+        /* -webkit-transform: rotate(-deg); 
+        -moz-transform: rotate(-90deg);  */
+        /* filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3); 
+    }*/
+
+    .baseline {
+        stroke-width: 0.015rem;
+        fill: none;
+        stroke: #343e3d;
+        opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+    <div id="navbar">
+        <ul>
+            <li id="home-button"><i class="fas fa-home"></i></li>
+            <li id="explore-button"><i class="fas fa-sun"></i></li>
+            <li id="dashboard-button"><i class="fas fa-columns"></i></li> 
+        </ul>
+    </div>
+    <div id="dashboard-main">
+        <div id="toolbar">
+                <span>Overview of Beijing Air Pollution</span>
+                <select class="select" id="station">
+                    <option value="Aotizhongxin">Select station</option>
+                    <option value="Aotizhongxin">Aoti Zhongxin</option>
+                    <option value="Changping">Changping</option>
+                    <option value="Dingling">Dingling</option>
+                    <option value="Dongsi">Dongsi</option>
+                    <option value="Guanyuan">Guanyuan</option>
+                    <option value="Gucheng">Gucheng</option>
+                    <option value="Huairou">Huairou</option>
+                    <option value="Nongzhanguan">Nongzhanguan</option>
+                    <option value="Shunyi">Shunyi</option>
+                    <option value="Tiantan">Tiantan</option>
+                    <option value="Wanliu">Wanliu</option>
+                    <option value="Wanshouxigong">Wanshou Xigong</option>
+                </select>
+            
+                <select class="select" id="pollutant">
+                    <option value="total">Select pollutant</option>
+                    <option value="PM2_5">PM2.5</option>
+                    <option value="PM10">PM10</option>
+                    <option value="SO2">SO2</option>
+                    <option value="NO2">NO2</option>
+                    <option value="CO">CO</option>
+                    <option value="O3">O3</option>
+                    <option value="total">Overall AQI</option>
+                </select>
+
+                <input class="select" type="checkbox" id="rainOption" value="rain" name="rain"><label for="rain">Precipitation</label> 
+                <input class="select" type="checkbox" id="tempOption" value="temp" name="temp"><label for="temp">Temperature</label> 
+                <input class="select" type="checkbox" id="dewOption" value="dew" name="dew"><label for="dew">Dew point</label> 
+                <!-- <select class="select" id="doSort">
+                    <option value="sort">Rank the index of pollutants</option>
+                    <option value="unsort">Do not rank the index of pollutants</option>
+                </select> -->
+
+                <select class="select" id="year">
+                    <option value="2013">Mar 2013 - Feb 2014</option>
+                    <option value="2014">Mar 2014 - Feb 2015</option>
+                    <option value="2015">Mar 2015 - Feb 2016</option>
+                    <option value="2016">Mar 2016 - Feb 2017</option>
+                </select>
+            </div>    
+    
+        <div id="full-radial">
+            <div id="left-radial">
+                <div id="radial-chart"></div>
+            </div>
+            <div id="right-radial">
+                <div id="tooltip">
+
+                </div>
+                <div id="legend-section">
+                    <h3>Legend</h3>
+                    <h5>AQI</h5>
+                    <div id="aqi-legend-section"></div>
+                    <h5 id="rain-legend-title"></h5>
+                </div>
+            </div>
+        </div>
+      
+        <div id="explore-detail">
+            <button id="detail"></button>
+        </div>
+    </div>
+</body>
+<script src="./scripts/radial.js"></script>
+<script>
+    function UpdateRadial() {
+        var stationName = document.getElementById("station").value;
+        var file = "./resources/dataset/PRSA_Data_" + stationName + "_20130301-20170228.csv";
+        
+        d3.csv(file).row(RowConverter).get(function(data) {
+            var daily_data = ProcessDailyData(data);
+            DrawRadial(daily_data);
+        })
+    }
+    function Init() {
+        InitMenu();
+        InitRadial();
+        var toolbar = document.querySelectorAll(".select").forEach(item => {
+            item.addEventListener("change", event => {
+                UpdateRadial();        
+            });      
+        })};
+    window.onload = Init;
+</script>
+</html>

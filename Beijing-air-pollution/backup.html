@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="description" content="Data Visualisation"/>
+    <meta name="keywords" content="HTML, CSS, D3"/>
+    <meta name="author" content="Chuong Ho" />
+
+    <!-- Font -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link href="styles/dashboard.css" type="text/css" rel="stylesheet"/>
+    <!-- <link href="styles/line-chart.css" type="text/css" rel="stylesheet"/> -->
+    <link href="styles/bar-chart.css" type="text/css" rel="stylesheet"/>
+    <link href="styles/bump-chart.css" type="text/css" rel="stylesheet"/>
+
+    <!-- Javascript-->
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="./scripts/utils.js"></script>
+    <script src="./scripts/data.js"></script>
+    <script src="./scripts/nav.js"></script>
+    <!-- <script src="./scripts/line-chart.js"></script> -->
+    <script src="./scripts/bar-chart.js"></script>
+    <script src="./scripts/pie-chart.js"></script>
+    <script src="./scripts/bump-chart.js"></script>
+    <!-- <link href="style/main.css" type="text/css" rel="stylesheet"/> -->
+    <!-- <script src="script/script.js"></script> -->
+
+    <title>Beijing Air Dashboard</title>
+</head>
+
+<body>
+    <div id="navbar">
+        <ul>
+            <li id="home-button"><i class="fas fa-home"></i></li>
+            <li id="explore-button"><i class="fas fa-sun"></i></li>
+            <li id="dashboard-button"><i class="fas fa-columns"></i></li> 
+        </ul>
+    </div>
+    <div id="dashboard-main">
+        <h1>Air Pollution in Beijing</h1>
+        <div id="toolbar">
+                <select class="select" id="station">
+                    <!-- <option value="">Select a station</option> -->
+                    <option value="Aotizhongxin">Aoti Zhongxin</option>
+                    <option value="Changping">Changping</option>
+                    <option value="Dingling">Dingling</option>
+                    <option value="Dongsi">Dongsi</option>
+                    <option value="Guanyuan">Guanyuan</option>
+                    <option value="Gucheng">Gucheng</option>
+                    <option value="Huairou">Huairou</option>
+                    <option value="Nongzhanguan">Nongzhanguan</option>
+                    <option value="Shunyi">Shunyi</option>
+                    <option value="Tiantan">Tiantan</option>
+                    <option value="Wanliu">Wanliu</option>
+                    <option value="Wanshouxigong">Wanshou Xigong</option>
+                </select>
+            
+                <select class="select" id="pollutant">
+                    <option value="">Select a pollutant</option>
+                    <option value="PM2_5">PM2.5</option>
+                    <option value="PM10">PM10</option>
+                    <option value="SO2">SO2</option>
+                    <option value="NO2">NO2</option>
+                    <option value="CO">CO</option>
+                    <option value="O3">O3</option>
+                    <option value="total">Total</option>
+                </select>
+
+                <select class="select" id="doSort">
+                    <option value="sort">Rank the index of pollutants</option>
+                    <option value="unsort">Do not rank the index of pollutants</option>
+                </select>
+                
+                <select class="select" id="year">
+                    <option value="2013">Mar 2013 - Feb 2014</option>
+                    <option value="2014">Mar 2014 - Feb 2015</option>
+                    <option value="2015">Mar 2015 - Feb 2016</option>
+                    <option value="2016">Mar 2016 - Feb 2017</option>
+                    <option value="custom">Customize time</option>
+                </select>
+                <script>
+                    var yearOption = document.getElementById("year");
+                    yearOption.addEventListener("change", function(d) {
+                        if (yearOption == "custom")
+                        {
+                            $( "<div id = 'timeRange'>"
+                                + "<input id='beginDate' type='date' min='2013-03-01' max='2017-02-28' placeholder='Select begin date'> " 
+                                + "<input id='endDate' type='date' min='2013-03-01' max='2017-02-28' placeholder='Select end date'>"
+                                + "</div>").insertAfter("#year");
+                        }
+                        else {
+                            $("#timeRange").remove();
+                        }
+                    })
+                </script>
+
+
+        </div>
+        <!-- <div id="line-chart">
+        </div> -->
+        <div id="map-chart">
+        </div>
+        <!-- <div id="pie-chart">
+        </div> -->
+        <div id="bump-chart"></div>
+        <div id="bar-chart">
+        </div>
+        <div> Note:
+            Add legend.
+            Add interactive.
+            Add sort and unsort.
+        </div>
+    </div>
+    <script>
+
+        function DisplayDashboard(stationName, pollutant)
+        {
+            var file = "./resources/dataset/PRSA_Data_" + stationName + "_20130301-20170228.csv";
+            d3.csv(file, RowConverter).then(function(data) {
+                var len = 24*7;
+                var dataset = data.slice(len * 1, len * 2);
+                DrawBarChart(dataset, pollutant);
+                var freq = CalculateDistributionLevel(dataset);   
+                DrawPieChart(freq);
+                DrawBumpChart(dataset);
+            });  
+        }
+
+        function Init() {
+            InitMenu();
+            InitToolBar();
+            stationName = "Aotizhongxin";
+            var file = "./resources/dataset/PRSA_Data_" + stationName + "_20130301-20170228.csv";
+            d3.csv(file, RowConverter).then(function(data) {
+                var len = 24*7;
+                var dataset = data.slice(len * 1, len * 2);
+                InitBarChart(dataset);
+
+                var freq = CalculateDistributionLevel(dataset);   
+                InitPieChart(freq);
+                InitBumpChart(dataset);
+
+            });  
+        }
+        window.onload = Init;
+    </script>
+</body>
+</html>

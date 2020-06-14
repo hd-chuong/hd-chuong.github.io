@@ -1,0 +1,138 @@
+body 
+{
+    /* background-color: #F5F5F5; */
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    height: 100%;
+    align-items: stretch;
+}
+
+/* Nav bar design */
+#navbar ul li
+{
+    font-size: 1rem;
+    list-style-type:none;
+    margin: 0.5rem 0.5rem;
+}
+
+#navbar ul li:hover {
+    transition: 0.5s ease;
+    color: yellow;
+}
+
+#navbar {
+    background-color: #1C3041;
+    color: white;
+    height: 100%;
+    width: 8%;
+    display: block;
+    text-align: left;
+    margin: 0rem 1rem 0rem 0rem;
+    transition: 0.5s ease;
+}
+
+#navbar:hover {
+    background-color: #1C3041;
+    color: white;
+    height: 100%;
+    width: 12%;
+    display: block;
+    text-align: left;
+    margin: 0rem 0.5rem 0rem 0rem;
+    transition: 0.5s ease;
+}
+
+/* Dashboard design */
+
+#dashboard-main {
+    display: block;
+}
+
+#dashboard-main h1 {
+    font-size: 3rem;
+    margin: 0rem;
+}
+
+
+
+.baseline {
+    fill: none;
+    stroke: #343e3d;
+    stroke-width: 0.1rem;
+}
+
+#bar-chart svg {
+    background-color: white;
+}
+
+
+.line {
+    fill: none;
+    stroke: #379683;
+    stroke-width: 2
+}
+
+#toolbar select, #toolbar #dateOption{
+    /* -webkit-appearance: none;
+    -moz-apprearance: none; */
+    appearance: none;
+    outline: none;
+    border: none;
+}
+
+#toolbar select, #toolbar #dateOption{
+    margin: 0.5rem;
+    /* position: relative; */
+    overflow: hidden;
+}
+
+#toolbar select, #toolbar #dateOption{
+    color: #343e3d;
+    /* width: 10rem; */
+    cursor: pointer;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+#toolbar select:hover, #toolbar #dateOption:hover, #toolbar #endDate:hover {
+    color: white;
+    background-color: #343e3d;
+    transition: 0.5s ease;
+}
+
+
+svg {
+    background-color: white;
+}
+
+#compare-chart {
+    display: flex;
+}
+
+#bump-chart {
+    width: 90%;
+}
+
+#bump-interactive {
+    width: 10%;
+    text-align: center;
+}
+
+.index {
+    margin: auto;  
+}
+
+.left-annotate text, .right-annotate text{
+    font-size: 12px;
+    padding: 2px;
+    margin: auto;
+}
+
+.yAxis text .xAxis text {
+    font-size: 10px;
+}
+
+#compare-chart {
+    font-family: 'Lora', sans-serif;
+}
