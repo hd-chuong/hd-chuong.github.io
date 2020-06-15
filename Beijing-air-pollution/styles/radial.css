@@ -38,10 +38,11 @@
 }
 
 #legend-section {
-    top: 55%;
+    top: 25%;
     width: 100%;
     font-size: 15px;
     border-width: 0.1rem;
+    text-align: center;
 }
 
 /* #tooltip {
@@ -51,7 +52,7 @@
 #tooltip td {
     text-align: center;
     vertical-align: middle;
-    padding: 5px 10px;
+    padding: 2px 10px;
 }
 
 #tooltip .index, #tooltip h3 {

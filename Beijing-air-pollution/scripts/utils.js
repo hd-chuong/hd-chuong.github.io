@@ -1,9 +1,9 @@
 /*
-Utils 
-target: dashboard.html
-Author: Chuong Ho
-Course: COS30045 - Data Visualization
-Date created: 06/05/2020
+    Utils 
+    target: all files
+    Author: Chuong Ho
+    Course: COS30045 - Data Visualization
+    Date created: 06/05/2020
 */
 
 function ToInt(a)
@@ -239,23 +239,6 @@ function FilterDateData(data, refDate)
 
 function ConvertRawToAQI(raw)
 {
-    // var result = {
-    //     id: record.id,
-    //     CO: COToAQI(record.CO),
-    //     NO2: NO2ToAQI(record.NO2),
-    //     O3: 0,
-    //     PM2_5: 0,
-    //     PM10: 0,
-    //     SO2: 0,
-    //     aqi: 0,
-    //     station: data[i].station,
-    //     temp: 0,
-    //     minTemp: 1000,
-    //     maxTemp: -1000,
-    //     dew: 0,
-    //     rain: 0,
-    //     time: refDate
-    // }
     var result = [...raw];
     
     raw.forEach(function(record, i) {

@@ -7,10 +7,6 @@
     <meta name="author" content="Chuong Ho" />
 
     <!-- Font -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope&family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Playfair+Display&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
@@ -24,19 +20,15 @@
     <!-- Javascript-->
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+
     <script src="./scripts/utils.js"></script>
     <script src="./scripts/data.js"></script>
     <script src="./scripts/nav.js"></script>
-    
     <script src="./scripts/line-chart.js"></script>
     <script src="./scripts/temperature-chart.js"></script>
-    <!-- <script src="./scripts/bar-chart.js"></script> -->
-    <!-- <script src="./scripts/pie-chart.js"></script> -->
-    <!-- <script src="./scripts/bump-chart.js"></script> -->
-    <!-- <link href="style/main.css" type="text/css" rel="stylesheet"/> -->
-    <!-- <script src="script/script.js"></script> -->
 
-    <title>Beijing Air Dashboard</title>
+    <title>Beijing Hourly Air Quality</title>
 </head>
 
 <body>
@@ -74,17 +66,6 @@
                 <input class="select" type="checkbox" id="SO2Option" name="SO2"><label for="SO2">SO2 </label> 
                 <input class="select" type="checkbox" id="O3Option" name="O3"><label for="O3">O3 </label> 
                 <input class="select" type="checkbox" id="aqiOption" checked='true' name="AQI"><label for="AQI">AQI </label> 
-                <!-- <select class="select" id="pollutant">
-                    <option value=""></option>
-                    <option value="PM2_5">PM2.5</option>
-                    <option value="PM10">PM10</option>
-                    <option value="SO2">SO2</option>
-                    <option value="NO2">NO2</option>
-                    <option value="CO">CO</option>
-                    <option value="O3">O3</option>
-                    <option value="total">Total</option>
-                </select> -->
-
                 <input class='select' id='dateOption' type='date' min='2013-03-01' max='2017-02-28'  value='2015-01-01' placeholder='Select date'>
 
 
@@ -111,11 +92,6 @@
 
                 var dayData = FilterDateData(data, currentDate);
                 var dataset = ConvertRawToAQI(dayData);
-                // var len = 24;
-                // var dataset = data.slice(len * 1, len * 2);
-                // DrawBarChart(dataset, pollutant);
-                // var freq = CalculateDistributionLevel(dataset);   
-                // DrawPieChart(freq);
                 DrawBumpChart(dataset);
                 DrawTempChart(dataset);
             });  
@@ -130,13 +106,8 @@
                 var currentDate = new Date(document.getElementById("dateOption").value);
                 var dayData = FilterDateData(data, currentDate);
                 var dataset = ConvertRawToAQI(dayData);
-                // InitBarChart(dataset);
-
-                // var freq = CalculateDistributionLevel(dataset);   
-                // InitPieChart(freq);
                 InitBumpChart(dataset);
-                    InitTempChart(dataset);
-                //InitLineChart(dataset);
+                InitTempChart(dataset);
             }); 
             
             var toolbar = document.querySelectorAll(".select").forEach(item => {

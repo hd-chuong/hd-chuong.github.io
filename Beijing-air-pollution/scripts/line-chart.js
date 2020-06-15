@@ -1,6 +1,6 @@
 /*
     Line chart 
-    target: linechart.html
+    target: dashboard.html
     Author: Chuong Ho
     Course: COS30045 - Data Visualization
     Date created: 06/05/2020
@@ -21,66 +21,6 @@ var dailyData;
 var xAxis = d3.axisBottom().scale(bump_xScale).ticks(10);
 var yAxis = d3.axisLeft().scale(bump_yScale).ticks(10);
 
-// number of x, y ticks
-//
-// function LineChart(dataset) 
-// {
-//     var startTime = d3.min(dataset, function(d) {
-//         return d.time;
-//     });
-
-//     var endTime = d3.max(dataset, function(d) {
-//         return d.time;
-//     });
-
-//     var xScale = d3.scaleTime()
-//                     .domain([
-//                         startTime, endTime
-//                     ])
-//                     .range([0, w - x_padding]);
-
-//     var maxAQI = d3.max(dataset, function(d) {
-//         return d.aqi;
-//     });
-
-//     var yScale = d3.scaleLinear()
-//                     .domain([0, maxAQI])
-//                     .range([h - y_padding, 0]);
-    
-//     var xAxis = d3.axisBottom().scale(xScale).ticks(dataset.length / 48);
-//     var yAxis = d3.axisLeft().scale(yScale).ticks(10);
-    
-//     var line = d3.line()
-//                 .curve(d3.curveCardinal.tension(0) )
-//                 .x(function(d) {
-//                     return xScale(d.time) + x_padding;
-//                 })
-//                 .y(function(d) {
-//                     return yScale(d.aqi);
-//                 });
-
-//     var svg = d3.select("#line-chart")
-//                 .append("svg")
-//                 .attr("width", w)
-//                 .attr("height", h);
-    
-//     svg.append("path")
-//        .datum(dataset)
-//        .attr("class", "line")
-//        .attr("d", line);
-
-//     svg.append("g").attr("transform", "translate(" + x_padding +" , " + (h - y_padding) +")").call(xAxis);
-//     svg.append("g").attr("transform", "translate(" + x_padding + ", 0)").call(yAxis);
-// }
-
-// function InitLineChart()
-// {
-//     d3.csv("./resources/dataset/mock.csv", RowConverter).then(function(data) {
-//         var dataset = data.slice(0,50);
-//         LineChart(dataset);
-//         console.log(dataset);
-//     });
-// }
 
 function drawPollutant(pollutant, bump_xScale, bump_yScale)
 {
@@ -105,7 +45,6 @@ function AnnotateBumpChart(dataset, bump_xScale, bump_yScale)
         .transition()
         .attr("x", 0)
         .attr("y", function(d) {
-            //return 0.5 * (bump_yScale(d.y0) + bump_yScale(d.y1)) - bump_yScale(dataset[0].total / 2) + h / 2;
             return bump_yScale(d.y1 - d.y0) + 5;
         })
         .text(function(d) {
@@ -128,7 +67,6 @@ function AnnotateBumpChart(dataset, bump_xScale, bump_yScale)
         .attr("x", 0)
         .attr("y", function(d) {
             var totalHeight = dataset[dataset.length - 1].total;
-            //return 0.5 * (bump_yScale(d.y0) + bump_yScale(d.y1)) - bump_yScale(totalHeight / 2) + h / 2;
             return bump_yScale(d.y1 - d.y0) + 5;
         })
         .text(function(d) {
@@ -236,18 +174,6 @@ function DrawBumpChart(dataset)
     });
     bump_yScale.domain([0, maxY + offsetUp]);
 
-    // svg.append("g")
-    // .attr("class", ".xAxis")
-    // .attr("transform", "translate(0," + (h - 20) + ")")
-    // .call(xAxis);
-
-    // svg.append("g")			
-    // .attr("class", "grid vertical")
-    // .attr("transform", "translate(0," + h + ")")
-    // .call(DrawVerticalGrid(bump_xScale)
-    //     .tickSize(-h)
-    //     .tickFormat("")
-    // )
 
     d3.select("#line-chart-region .yAxis")
     .transition()   
@@ -266,29 +192,6 @@ function DrawBumpChart(dataset)
 
 }
 
-// function DrawInteractive(record, bump_xScale, bump_yScale)
-// {
-//     var interactive = d3.select("#bump-interactive");
-//     interactive.selectAll("text").remove();
-//     interactive.selectAll("text")
-//                 .data(record.pollutant)
-//                 .enter()
-//                 .append("text")
-//                 .attr("class", (d) => "pollutant-label " + d.pollutant)
-//                 //.transition()
-//                 .attr("x", 0)
-//                 .attr("y", function(d) {
-//                     return 0.5 * (bump_yScale(d.y0) + bump_yScale(d.y1)) - bump_yScale(record.total / 2) + h / 2;
-//                 })
-//                 .text(function(d) {
-//                     return d.pollutant + ": " + (d.y1 - d.y0);
-//                 });
-//     interactive.append("text")
-//                 .attr("x", 0)
-//                 .attr("y", 20)
-//                 .text(record.time);                
-// }
-
 function DrawToolTip(d, bump_xScale, bump_yScale)
 {
     document.getElementById("bump-interactive").innerHTML="";
@@ -298,7 +201,7 @@ function DrawToolTip(d, bump_xScale, bump_yScale)
         "<h3>" + displayTime(d.time, true) + "</h3><br/>"
     )
     $("#bump-interactive").append(
-        + "<table class='index' style='border: none'>"  
+        "<table class='index' style='border: none'>"  
         + "<tr>"
         +  "<td>Overall AQI</td>"
         +  "<td>" + parseInt(d.aqi) + "</td>"
@@ -352,16 +255,6 @@ function DrawToolTip(d, bump_xScale, bump_yScale)
 
 function BumpChart(dataset, bump_xScale, bump_yScale)
 {    
-    // var xAxis = d3.axisBottom().scale(bump_xScale).ticks(dataset.length / 48);
-    // var yAxis = d3.axisLeft().scale(bump_yScale).ticks(10);
-
-    //console.log(dataset[0].pollutant);
-
-    // var svg = d3.select("#bump-chart")
-    //             .append("svg")
-    //             .attr("width", w)
-    //             .attr("height", h);
-
     var svg = d3.select("#bump-chart svg #line-chart-region");
     for (let name in pollutantColorCode)
     {
@@ -391,10 +284,6 @@ function InitBumpChart(dataset)
         return d.time;
     });
     
-    // var bump_xScale = d3.scaleTime().domain([
-    //     startTime, endTime
-    // ]).range([0, w - 50]);
-
     bump_xScale.domain([startTime, endTime])
 
     var color = d3.scaleOrdinal()
@@ -420,7 +309,6 @@ function InitBumpChart(dataset)
             return d;
         })
         .sort(function(a, b) {
-            //return (document.getElementById("doSort").value == "sort") ? +d[a] - +d[b] : 1;
             return +d[a] - +d[b];
         })
 
@@ -438,9 +326,7 @@ function InitBumpChart(dataset)
     var maxY = d3.max(dataset, function(d) {
         return d.max;
     });
-    // var bump_yScale = d3.scaleLinear()
-    //                 .domain([0, maxY + offsetUp])
-    //                 .range([h - 10, 0]);
+
     bump_yScale.domain([0, maxY + offsetUp]);    
 
     var svg = d3.select("#bump-chart")
@@ -535,19 +421,11 @@ function InitBumpChart(dataset)
     });
     AnnotateBumpChart(dataset, bump_xScale, bump_yScale);
 
-    // var interactive = d3.select("#bump-chart").append("svg")
-    //                     .attr("id", "bump-interactive")
-    //                     .attr("class", ".bump.interactive")
-    //                     .attr("width", h)
-    //                     .attr("height", h);
-
-
     var bisectDate = d3.bisector(function(d) {return d.time}).left;
 
     dailyData = dataset;
 
     svg.on("mousemove", function(d) {
-        //console.log(d3.mouse(this)[0]);
         var mouse_x = d3.mouse(this)[0];
         var mouse_time = bump_xScale.invert(mouse_x);
         var i = Math.min(bisectDate(dailyData, mouse_time, 1), dailyData.length - 1);
@@ -574,5 +452,3 @@ function InitBumpChart(dataset)
     description.innerText = "Air quality in " + $("#station").val() + " on " + $("#dateOption").val();
     document.getElementById("bump-chart").appendChild(description);
 }
-
-// window.onload = Init; 

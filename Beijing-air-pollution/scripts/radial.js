@@ -8,16 +8,13 @@ var innerRadiusTemp = 280;
 var outerRadiusTemp = 370;
 
 var border = outerRadiusTemp - 100;
-// var parseTime = d3.timeParse("%d-%b-%y");
-// var formatMonth = d3.timeFormat("%b");
-// var fullCircle = 2 * Math.PI;
 
 var x = d3.scaleTime().range([0.015 * Math.PI, 1.985 * Math.PI]);
 
-var y = d3.scaleRadial()
+var y = d3.scaleLinear()
     .range([innerRadius, outerRadius]);
 
-var yTemp = d3.scaleRadial()
+var yTemp = d3.scaleLinear()
 .range([innerRadiusTemp, outerRadiusTemp]);
 
 var rainScale = d3.scaleSqrt().range([0, 25]);
@@ -67,12 +64,12 @@ function DrawPollutionLegend()
     .attr("y", 20)
     .attr("x", function(d, i) {
     let y = y0;
-    y0 += colorLength[i] / 2;
+    y0 += colorLength[i];
     return y;
     })
     .attr("height", 10)
     .attr("width", function(d, i) {
-    return colorLength[i] / 2;
+    return colorLength[i];
     })
     .attr("fill", function(d,i) {
     return d;
@@ -88,8 +85,8 @@ function DrawPollutionLegend()
     .attr("writing-mode", "vertical-rl")
     .attr("y", 40)
     .attr("x", function(d, i) {
-    let y = y0 + colorLength[i] / 4;
-    y0 += colorLength[i] / 2;
+    let y = y0 + colorLength[i] / 2;
+    y0 += colorLength[i];
     return y;
     })
     .text((d) => d)
@@ -104,7 +101,7 @@ function DrawPollutionLegend()
     .attr("y", 15)
     .attr("x", function(d, i) {
         let y = y0;
-        y0 += colorLength[i] / 2;
+        y0 += colorLength[i];
         return y;
     })
     .text(function(d, i) {
@@ -324,11 +321,11 @@ function DrawRain(pollutant_data)
     .on("mouseover", function(d) {
         d3.selectAll("path").attr("opacity", 0.1);
         d3.selectAll("#rain circle").attr("opacity", 0.2);
-        d3.select(this).attr("opacity", 0.85);
+        d3.select(this).attr("opacity", 0.95);
         DrawToolTip(d);
     })
     .on("mouseout", function() {
-        d3.selectAll("path").attr("opacity", 0.85);
+        d3.selectAll("path").attr("opacity", 0.95);
         d3.selectAll("rain").attr("opacity", 0.5);
         document.getElementById("tooltip").innerHTML = "";
     }); 
@@ -356,17 +353,9 @@ function DrawRadial(data)
     var svg = d3.select("#radial-chart svg")
     .call(d3.zoom().on("zoom", function(data) {
         k = d3.event.transform.k;
-        console.log(d3.event.transform.k);
         ZoomRadial(data);
     }));
     var g = svg.select("#radial-g");
-    // night_data = data.filter(function(d, i) {
-    //     var upper_limit = new Date(year + 1, 2);
-    //     var lower_limit = new Date(year, 2);
-
-    //     return d.time.getTime() < upper_limit.getTime() && d.time.getTime() >= lower_limit.getTime();
-        
-    // })
 
     x.domain(d3.extent(pollutant_data, function(d) { return d.time; }));
     y.domain(d3.extent(pollutant_data, function(d) { return SelectPollutant(d, pollutant); }));
@@ -398,7 +387,7 @@ function DrawRadial(data)
             }
             return colors[colors.length - 1];
         })
-        .attr("opacity", 0.85)
+        .attr("opacity", 0.95)
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
         .attr("d", d3.arc()     // imagine your doing a part of a donut plot
         .innerRadius(innerRadius)
@@ -415,7 +404,7 @@ function DrawRadial(data)
             DrawSupplementaryScale(d);
         })
         .on("mouseout", function() {
-            d3.selectAll("path").attr("opacity", 0.85);
+            d3.selectAll("path").attr("opacity", 0.95);
             document.getElementById("tooltip").innerHTML = "";
         }); 
     // 
@@ -466,31 +455,6 @@ function DrawRadial(data)
     .attr("class", "baseline")
     .attr("x2", -5)
     .attr("x1", border);
-
-    // xTick.append("line")
-    // .attr("class", "rcik")
-    // .attr("x2", -5)
-    // .attr("x1", border);
-    // var labels = yTick.select(".topYAxis")
-    //                 .attr("y", function(d) { return -y(d); })
-    //                 .attr("dy", "0.35em")
-    //                 .text(function(d) { return d; });
-
-    // yTick.select(".bottomYAxis")
-    //     .attr("y", function(d) { return -y(d); })
-    //     .attr("dy", "0.35em")
-    //     .attr("transform", "rotate(-180)")
-    //     .text(function(d) { return d; });
-    
-    //yTick.selectAll(".topYAxis").remove();
-    //yTick.selectAll(".bottomYAxis").remove();
-            
-    // yTick.append("text")
-    // .attr("class", "bottomYAxis")
-    // .attr("y", function(d) { return -y(d); })
-    // .attr("dy", "0.35em")
-    // .attr("transform", "rotate(-180)")
-    // .text(function(d) { return d; });
 
     d3.selectAll(".bottomYAxis").attr("transform", "rotate(180)");
     var xAxis = g.select("#xAxis");
@@ -548,17 +512,12 @@ function InitRadial()
 
     d3.select("#radial-chart svg")
                 .call(d3.zoom().on("zoom", function () {
-                    d3.select("#radial-chart svg #radial-g").attr("transform", d3.event.transform)
+                    d3.select("#radial-chart svg #radial-g").attr("transform", d3.event.transform);
+                    k = d3.event.transform.k;
             }));
     var g = svg.append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
-        
-
-    // var path = d3.areaRadial()
-    //             .angle(function(d) { return x(d.time)})
-    //             .innerRadius(function(d) { return innerRadius;})
-    //             .outerRadius(function(d) { return y(d.temp)});
-    
+            
     d3.csv("./resources/dataset/PRSA_Data_Aotizhongxin_20130301-20170228.csv" , RowConverter, function(error, data) {
         var data = ProcessDailyData(data);
         
@@ -636,11 +595,11 @@ function InitRadial()
         .on("mouseover", function(d) {
             d3.selectAll("path").attr("opacity", 0.1);
             d3.selectAll("#rain circle").attr("opacity", 0.2);
-            d3.select(this).attr("opacity", 0.85);
+            d3.select(this).attr("opacity", 0.95);
             DrawToolTip(d);
         })
         .on("mouseout", function() {
-            d3.selectAll("path").attr("opacity", 0.85);
+            d3.selectAll("path").attr("opacity", 0.95);
             d3.selectAll("rain").attr("opacity", 0.5);
             document.getElementById("tooltip").innerHTML = "";
         }); 
@@ -677,13 +636,6 @@ function InitRadial()
         var yAxisTemp = g.append("g")
         .attr("text-anchor", "middle")
         .attr("class", "yAxis-temp")
-        
-        // yTick.append("text")
-        // .attr("class", "bottomYAxis")
-        // .attr("y", function(d) { return -y(d); })
-        // .attr("dy", "0.35em")
-        // .attr("transform", "rotate(-180)")
-        // .text(function(d) { return d; });
 
         var xAxis = svg
                     .append("g")
@@ -728,7 +680,7 @@ function InitRadial()
             }
             return colors[colors.length - 1];
         })
-        .attr("opacity", 0.85)
+        .attr("opacity", 0.95)
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
         .attr("d", d3.arc()     // imagine your doing a part of a donut plot
         .innerRadius(innerRadius)
@@ -745,7 +697,7 @@ function InitRadial()
             DrawSupplementaryScale(d);
         })
         .on("mouseout", function() {
-            d3.selectAll("path").attr("opacity", 0.85);
+            d3.selectAll("path").attr("opacity", 0.95);
             document.getElementById("tooltip").innerHTML = "";
         }); 
 
@@ -764,16 +716,6 @@ function InitRadial()
         .text("Mar " + year + " - Feb " + (year + 1));  
     
         DrawLegend();
-        // var lineLength = linePlot.node().getTotalLength();
-        
-        // linePlot
-        // .attr("stroke-dasharray", lineLength + " " + lineLength)
-        // .attr("stroke-dashoffset", -lineLength)
-        // .transition()
-        //     .duration(2000)
-        //     .ease(d3.easeLinear)
-        //     .attr("stroke-dashoffset", 0);
-        
     });
 }
 

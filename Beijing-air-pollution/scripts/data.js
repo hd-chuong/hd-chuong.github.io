@@ -1,11 +1,14 @@
-var levels = [50, 100, 150, 200, 300];
-var colors = ["green", "yellow", "orange", "red", "purple", "maroon"];
-var rankings = ["good", "moderate", "unhealthy for sensitive groups", "unhealthy", "very unhealthy", "hazardous"]
-var colorLength = [50, 50, 50, 50, 100, 200];
-var indicator = [0, 50, 100, 150, 200, 300];
+var levels = [33, 66, 99, 149, 200];
+var colors = ["#31add3", "#99b964", "#ffd236", "#ec783a", "#d04730", "#782d49"];
+
+// for legend purposes
+var rankings = ["very good", "good", "fair", "poor", "very poor", "hazardous"]
+var colorLength = [33, 33, 33, 50, 51, 100];
+var indicator = [0, 33, 66, 99, 149, ">200"];
 
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
 var pollutantColorCode = {
     "PM2_5": "#EF476F",
     "PM10": "#F78C6B",
@@ -16,6 +19,7 @@ var pollutantColorCode = {
     "O3" : "#118AB2",
 }
 
+// coeff to normalize the existing raw data
 var air_coeff = {
     CO: 1250,
     NO2: 2050,
@@ -26,6 +30,7 @@ var air_coeff = {
     PM10: 1
 }
 
+// the standard level of pollution which is equivalent to AQI of 100.
 var standard = {
     CO: 9,
     NO2: 0.12,
@@ -34,12 +39,3 @@ var standard = {
     PM2_5: 25,
     PM10: 50
 }
-
-// var pollutantColorCode = {
-//     "PM2_5": "#291720",
-//     "PM10": "#820263",
-//     "SO2": "#d90368",
-//     "NO2": "#f75c03",
-//     //"CO": "073b4c",
-//     "O3" : "#04a777",
-// }

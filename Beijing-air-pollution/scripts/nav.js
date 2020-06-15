@@ -1,8 +1,8 @@
 function ExtendNavBar()
 {
-    document.getElementById("home-button").innerHTML = "<i class='fas fa-home'></i> Home";
-    document.getElementById("explore-button").innerHTML = "<i class='fas fa-sun'></i> Explore";
-    document.getElementById("dashboard-button").innerHTML = "<i class='fas fa-columns'></i> Dashboard"; 
+    document.getElementById("home-button").innerHTML = "<i class='fas fa-home'></i> Story";
+    document.getElementById("explore-button").innerHTML = "<i class='fas fa-sun'></i> Overview";
+    document.getElementById("dashboard-button").innerHTML = "<i class='fas fa-columns'></i> Daily"; 
 }
 
 function ShrinkNavBar()
@@ -17,7 +17,7 @@ function InitMenu()
     document.getElementById("navbar").addEventListener("mouseover", ExtendNavBar);
     document.getElementById("navbar").addEventListener("mouseleave", ShrinkNavBar);
     document.getElementById("home-button").addEventListener("click", function() {
-        location.href = "home.html";
+        location.href = "story.html";
     })
     document.getElementById("dashboard-button").addEventListener("click", function() {
         location.href = "dashboard.html";

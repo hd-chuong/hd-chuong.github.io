@@ -1,33 +1,79 @@
 <head>
-    <meta http-equiv="X-UA-Compatible" content="ie=chrone">
-    <link href="https://fonts.googleapis.com/css2?family=Manrope&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./styles/story.css">
-    <title>Story</title>
+    <title>Story telling with CSS and position sticky</title>
+    <!-- <link href="./styles/story2.css" type="text/css" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="./styles/story2.css">
+    
 </head>
 
 <body>
-    <header>
-        <img src="./resources/images/new-zealand2.jpg" alt="A savour of fresh air">
-    </header>
-
     <div class="intro">
-        <div class="intro-title">
-            <h2>Breathing clean air is the human inviolated right</h2>
-        </div>
+        <p class="intro-1">Having fresh air is an inviolable right.</p>
+        <p class="intro-2">However,</p>
+        <p class="intro-3">98%</p>
+        <p class="intro-4">of citizens in developing nations suffer from poor air quality.</p>
+    </div>
+    <div class="intro">
+        <p class="intro-2"></p>
+        <p class="intro-3">3.7</p>
+        <p class="intro-4">million of deaths are caused by air pollution each year around the world.</p>
+    </div>
 
-        <div class="intro-content">
-            <div class="intro-text">
-                <h2>Take amazing shots</h2>
-                <p>In 2013 Beijing adopted more systematic and intensive measures for air pollution control. 
-                    By the end of 2017 fine particulate pollution (PM2.5) fell by 35% and by 25% in the surrounding Beijing-Tianjin-Hebei region. 
-                    Much of this reduction came from measures to control coal-fired boilers, provide cleaner domestic fuels, and industrial restructuring. 
-                    Over this period annual emissions of sulfur dioxide (SO2), nitrogen oxides (NOx), particulate matter (PM10) and volatile organic compounds 
-                    in Beijing decreased by 83%, 43%, 55% and 42% respectively.</p>
+    <div class="about-me">
+        <div class="film">
+            <p>One of the most polluting cities in the world is Beijing.</p>
+            <div class="thumbnails">
+                <img src="resources/images/beijing-1.jpg" alt="">
+                <img src="resources/images/beijing-2.jpeg" alt="">
+                <img src="resources/images/beijing-3.jpg" alt="">
+
             </div>
         </div>
-        <img src="./resources/images/new-zealand.jpg" alt="">
     </div>
-    <div class="empty"></div>
-    <script src="./scripts/story.js"></script>
+
+    <div>
+        <p class="intro-1">This is a visualisation of Beijing air quality</p>
+        <p class="intro-1">The air quality index is measured by the maximum index of six major air pollutants, including:</p>
+    </div>
+
+    <div class="intro">
+        <p class="intro-3">PM10</p>
+        <p class="intro-4">particles with a diameter of 10 micrometres or less, small enough to get through throats, noses and lungs</p>
+    </div>
+
+    <div class="intro">
+        <p class="intro-3">PM2.5</p>
+        <p class="intro-4">particles with a diameter of 2.5 micrometres or less, small enough to get through lungs into bloodstreams.</p>
+    </div>
+    <div class="intro">
+        <p class="intro-3">SO<sub>2</sub></p>
+        <p class="intro-4">causes coughing, wheezing, shortness of breath, or a chest tightness.</p>
+    </div>
+
+    <div class="intro">
+        <p class="intro-3">NO<sub>2</sub></p>
+        <p class="intro-4">inflames the lining of the lungs, and it can reduce immunity to lung infections.</p>
+    </div>
+
+    <div class="intro">
+        <p class="intro-3">O<sub>3</sub></p>
+        <p class="intro-4">causes pain in  ears, eyes, nose and throat and coughing.</p>
+    </div>
+
+    <div class="intro">
+        <p class="intro-3">CO</p>
+        <p class="intro-4">in large amount prevents brains, nerve tissues and heart from receiving enough oxygen to work properly.</p>
+    </div>
+    
+    <div class="about-me">
+        <div class="film">
+            <p>View visualisation <a href="./overview.html">here<i class="fas fa-sun"></i></p>
+            <div class="thumbnails">
+                <img src="resources/images/NO2-demo.png" alt="">
+                <img src="resources/images/O3-demo.png" alt="">
+            </div>
+        </div>
+    </div>   
 </body>
+

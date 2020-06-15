@@ -1,9 +1,6 @@
 :root {
-    --clr-1: #f25c00;
-    --clr-2: #ec4559;
-    --clr-3: #bf4686;
-    --clr-4: #41537f;
-    --clr-5: #2f4858;
+    --clr-4: #DDD;
+    --clr-5: #FFF;
 }
 
 *,
@@ -13,14 +10,13 @@
 }
 
 body {
-    font-family: basix-sans, sans-serif;
+    font-family: 'Lora', sans-serif;
     font-weight: 300;
-    background: linear-gradient(var(--clr-1), var(--clr-2));
+    background: linear-gradient(var(--clr-4), var(--clr-5));
     min-height: 100vh;
-
     font-size: 3.5rem;
     margin: 0;
-    color: rga(black, 0.7);
+    /* color: white; */ 
     /* font-size: 24px; */
 }
 
@@ -35,31 +31,44 @@ img {
 .intro {
     display: grid;
     grid:
-        "hello hello" 75vh
-        "my-name-is kevin" 125vh / max-content 1fr;
-    margin-bottom: 50vh;
+        "big-title big-title big-title" 100vh
+        "left-text middle-text middle-text1" 40vh / max-content 0.5fr;
+    margin-bottom: 25vh;
     grid-gap: 15px;
 }
 
 .intro-1 {
-    grid-area: hello;
+    grid-area: big-title;
     align-self: center;
     position: sticky;
     top: 2em;
-    margin-bottom: 1.5em;
+    margin-bottom: 4em;
+    text-align: center;
 }
 
 .intro-2 {
-    grid-area: my-name-is;
-    font-weight: 900;
-    font-style:italic;
+    grid-area: left-text;
     position: sticky;
-    top: 3.5em;
+    top: 6.5em;
     align-self: center;
+    margin-right: 1em;
+    margin-left: 1em;
+    text-align: center;
+}
+
+.intro-4 {
+    grid-area: middle-text1;
+    position: sticky;
+    margin-top: 1.5em;
+    top: 6.5em;
+    align-self: center;
+    margin-right: 1em;
+    margin-left: 1em;
 }
 
 .intro-3 {
-    grid-area: kevin;
+    font-weight: 900;
+    grid-area: middle-text;
     align-self: end;
 }
 
@@ -68,7 +77,7 @@ img {
     margin-bottom: 60vh;
 }
 
-.youtube {
+.film {
     width: 80%;
     margin: 0 auto;
     display: grid;
@@ -78,7 +87,7 @@ img {
 }
 
 
-.youtube p {
+.film p {
     position: sticky;
     top: 10vh;
     grid-area: text;
@@ -88,13 +97,11 @@ img {
 .thumbnails {
     grid-area: thumbnails;
     margin-top: 60vh;
-    background: var(--clr-5);
     padding: 0.3em;
     position: relative;
     margin-top: 60vh;
-    background: currentColor;
     padding: 0.3em;
-    color: black;
+
 }
 
 .thumbnails img {
@@ -147,3 +154,7 @@ img {
 
 }
 
+#overview-button {
+    text-align: center;
+    margin: auto;
+}
