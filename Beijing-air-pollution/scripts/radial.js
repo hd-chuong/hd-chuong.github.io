@@ -1,3 +1,8 @@
+//
+// create 15/05/2020
+// inherit layout from https://bl.ocks.org/tlfrd/fd6991b2d1947a3cb9e0bd20053899d6
+// target overview.html
+
 var margin = {top: 0, right: 0, bottom: 0, left: 0};
 var width = 1000 - margin.left - margin.right;
 var height = 1000 - margin.top - margin.bottom;
@@ -152,6 +157,7 @@ function DrawRainLegend()
     .attr("font-size", "12px")
 }
 
+// draw the legend part of the page
 function DrawLegend()
 {
     d3.selectAll("#legend-section svg").remove();
@@ -168,6 +174,8 @@ function DrawLegend()
     }
 }
 
+// draw the running scale 
+// help users read data on circle without difficulties
 function DrawSupplementaryScale(d)
 {
     let angle = ( x(d.time) * 360 / ( 2 * Math.PI));
@@ -183,6 +191,7 @@ function DrawSupplementaryScale(d)
     .style("font-size", 8 / Math.sqrt(k) + "px")
 }
 
+// interactive detail-on-demands
 function DrawToolTip(d)
 {
     var interactive = d3.select("#tooltip");
@@ -241,6 +250,7 @@ function DrawToolTip(d)
     )
 }
 
+// draw the temperature line
 function DrawTemperature(pollutant_data)
 {
     var temperature = document.getElementById("tempOption").checked;
