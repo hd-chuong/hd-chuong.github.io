@@ -21,7 +21,7 @@ var dailyData;
 var xAxis = d3.axisBottom().scale(bump_xScale).ticks(10);
 var yAxis = d3.axisLeft().scale(bump_yScale).ticks(10);
 
-
+// draw the the line of each pollutant
 function drawPollutant(pollutant, bump_xScale, bump_yScale)
 {
     return d3.line()
@@ -30,6 +30,8 @@ function drawPollutant(pollutant, bump_xScale, bump_yScale)
     .y((d) => bump_yScale(SelectPollutant(d, pollutant)));
 }
 
+// annotate with left labels and right labels.
+// help matching each line with its associated pollutants.
 function AnnotateBumpChart(dataset, bump_xScale, bump_yScale)
 {
     var svg = d3.select("#bump-chart svg #line-chart-region");
@@ -89,6 +91,8 @@ function DrawHorizontalGrid(bump_yScale)
     .ticks(10);
 }
 
+// draw the interactive point to make sure when the user hover on the chart.
+// they know which point they are reading
 function DrawCirclePoint(d)
 {    
     let timePosition = bump_xScale(d.time);
@@ -113,7 +117,7 @@ function DrawCirclePoint(d)
     })
 }
 
-
+//draw all component of the line chart
 function DrawBumpChart(dataset)
 {
     dailyData = dataset;
@@ -192,6 +196,7 @@ function DrawBumpChart(dataset)
 
 }
 
+// draw interactive features
 function DrawToolTip(d, bump_xScale, bump_yScale)
 {
     document.getElementById("bump-interactive").innerHTML="";
@@ -272,6 +277,7 @@ function BumpChart(dataset, bump_xScale, bump_yScale)
     }
 }
 
+// draw initial line chart
 function InitBumpChart(dataset)
 {
     var x_padding = 50;
